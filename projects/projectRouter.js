@@ -40,7 +40,19 @@ router.get('/:id', (req, res) => {
 
 // GET Project Actions
 
-
+router.get('/:id/actions', (req, res) => {
+  projects
+  .getProjectActions(req.params.id)
+  .then(data => {
+    res.status(200).json(data);
+  })
+  .catch(err => {
+    console.log(err);
+    res.status(500).json({
+      error: 'Error retrieving the actions',
+    });
+  });
+});
 
 // POST Project 
 
