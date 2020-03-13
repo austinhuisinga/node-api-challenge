@@ -60,11 +60,49 @@ router.post('/', (req, res) => {
 
 // UPDATE Project by ID
 
+router.put('/:id', (req, res) => {
+  if(!req.body) {
+    res.status(400).json({
+      message: 'name required',
+    })
+  };
 
+  projects
+  .update(req.params.id, req.body)
+  .then(project => {
+    if(project) {
+      res.status(200).json({
+        message: 'Project updated successfully',
+      })
+    } else {
+      res.status(404).json({
+        message: 'Project could not be found',
+      })
+    };
+  })
+})
 
 // DELETE Project by ID
 
-
+router.delete('/:id', (req, res) => {
+  projects
+  .remove(req.params.id)
+  .then(project => {
+    project > 0
+      ? res.status(200).json({
+        message: 'Project removed',
+      })
+      : res.status(404).json({
+        message: 'Invalid project',
+      });
+  })
+  .catch(err => {
+    console.log(err);
+    res.status(500).json({
+      message: 'Project could not be removed',
+    });
+  });
+});
 
 // custom middleware
 
