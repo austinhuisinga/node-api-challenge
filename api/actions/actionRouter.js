@@ -1,8 +1,9 @@
 const express = require('express');
-const actions = require('../data/helpers/actionModel');
+const actions = require('../../data/helpers/actionModel');
 const router = express.Router();
 
 // GET all Actions
+
 router.get('/', (req, res) => {
   actions
   .get()
@@ -17,8 +18,8 @@ router.get('/', (req, res) => {
   });
 });
 
-
 // GET Action by ID
+
 router.get('/:id', (req, res) => {
   actions
   .get(req.params.id)
@@ -39,8 +40,8 @@ router.get('/:id', (req, res) => {
   });
 });
 
-
 // POST Action
+
 router.post('/', (req, res) => {
   actions
   .insert(req.body)
@@ -55,8 +56,8 @@ router.post('/', (req, res) => {
   });
 });
 
-
 // UPDATE Action
+
 router.put('/:id', (req, res) => {
   if(!req.body) {
     res.status(400).json({
@@ -79,8 +80,8 @@ router.put('/:id', (req, res) => {
   });
 });
 
-
 // DELETE Action
+
 router.delete('/:id', async (req, res) => {
   try {
     await actions
@@ -115,7 +116,5 @@ router.delete('/:id', async (req, res) => {
 //     });
 //   });
 // });
-
-
 
 module.exports = router;
